@@ -41,17 +41,23 @@ class TrackPluginInstrumentation
     protected $mode;
 
     protected $moduleList;
+    
+    protected \Razorpay\Magento\Model\Config $config; // Add explicit property declaration
+    protected \Psr\Log\LoggerInterface $logger; // Add explicit property declaration
 
     public function __construct(
-        \Razorpay\Magento\Model\Config $config,
+        \Razorpay\Magento\Model\Config $config, // Update parameter type hint
         ModuleListInterface $moduleList,
-        \Psr\Log\LoggerInterface $logger
+        \Psr\Log\LoggerInterface $logger // Update parameter type hint
     )
     {
         $this->config       = $config;
+        $this->api          = $this->setAndGetRzpApiInstance();
         $this->moduleList   = $moduleList;
         $this->logger       = $logger;
     }
+
+
 
     public function setAndGetRzpApiInstance()
     {
